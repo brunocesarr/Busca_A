@@ -5,15 +5,13 @@
  */
 package Telas;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import principal.Busca;
 import principal.Leitura;
+import principal.Posicao;
 
 /**
  *
@@ -27,6 +25,7 @@ public class Painel extends javax.swing.JFrame {
     public Painel() {
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
         jInicio.setOpaque(true);
         jFinal.setOpaque(true);
     }
@@ -208,7 +207,7 @@ public class Painel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSolucionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -266,7 +265,6 @@ public class Painel extends javax.swing.JFrame {
                 public void run() {
                     try {
                         View view = new View(busca);
-                        view.setVisible(true);
                     } catch (Exception e) {
                     }
                 }
@@ -287,23 +285,33 @@ public class Painel extends javax.swing.JFrame {
     private void jNovaBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNovaBuscaActionPerformed
         // TODO add your handling code here:
         if (ler != null && ler.getMatriz() != null) {
-            Pontos ponto = new Pontos();
-            ponto.setVisible(true);
-            
-            try {
-                Thread.sleep(10000L);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Painel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            if (!ponto.hasFocus()) {
-                if (ponto.getInicio() != null && ponto.getFim() != null) {
-                    this.jInicio.setText(ponto.getInicio().toString());
-                    this.jFinal.setText(ponto.getFim().toString());
 
-                    this.busca = new Busca(ponto.getInicio(), ponto.getFim(), this.ler.getMatriz());
+            this.setEnabled(false);
+
+            int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+            boolean verifica = false;
+            while (!verifica) {
+                x1 = Integer.parseInt(JOptionPane.showInputDialog(this, "Informe a coordenada X1:"));
+                y1 = Integer.parseInt(JOptionPane.showInputDialog(this, "Informe a coordenada Y1:"));
+                x2 = Integer.parseInt(JOptionPane.showInputDialog(this, "Informe a coordenada X2:"));
+                y2 = Integer.parseInt(JOptionPane.showInputDialog(this, "Informe a coordenada Y2:"));
+                verifica = ((int) busca.getMatriz().retornaValor(x1, y1) == 1 && (int) busca.getMatriz().retornaValor(x2, y2) == 1)
+                        && (x1 >= 0 && x2 >= 0 && x1 < busca.getMatriz().getLinhas() && y1 < busca.getMatriz().getColunas());
+                if(!verifica){
+                    JOptionPane.showMessageDialog(this, "Informe coordenadas corretas!");
                 }
             }
+
+            Posicao inicio = new Posicao(x1, y1);
+            Posicao fim = new Posicao(x2, y2);
+
+            this.setEnabled(true);
+            this.setVisible(true);
+            
+            this.jInicio.setText(inicio.toString());
+            this.jFinal.setText(fim.toString());
+
+            this.busca = new Busca(inicio, fim, this.ler.getMatriz());
         } else {
             JOptionPane.showMessageDialog(rootPane, "Arquivo não carregado!");
         }

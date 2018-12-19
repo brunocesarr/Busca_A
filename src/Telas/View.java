@@ -7,10 +7,12 @@ package Telas;
  */
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -36,9 +38,6 @@ public class View extends JFrame {
     private Matriz maze;
     private Posicao agente;
 
-    private final List<Integer> path = new ArrayList<Integer>();
-    private int pathIndex;
-
     public View() {
         setTitle("Labirinto");
         setSize(400, 300);
@@ -47,10 +46,7 @@ public class View extends JFrame {
     }
 
     public View(Busca busca) {
-        setTitle("Simple Maze Solver");
-        setSize(640, 480);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this();
         this.maze = busca.getMatriz();
         this.agente = busca.getInicio();
         percorrer(busca);
@@ -62,10 +58,6 @@ public class View extends JFrame {
 
     public void setAgente(Posicao agente) {
         this.agente = agente;
-    }
-
-    public void setPathIndex(int pathIndex) {
-        this.pathIndex = pathIndex;
     }
 
     @Override
@@ -96,7 +88,7 @@ public class View extends JFrame {
         g.fillOval(30 * this.agente.getY(), 30 * this.agente.getX(), 30, 30);
     }
 
-    public void percorrer(Busca busca) {
+    private void percorrer(Busca busca) {
         Posicao atual;
         for (int i = 0; i < busca.getCaminho().size(); i++) {
             atual = busca.getCaminho().get(i).getAgente();
@@ -126,18 +118,6 @@ public class View extends JFrame {
                 View view = new View(busca);
                 view.setVisible(true);
                 percorrer(busca);
-                /*
-                 for (int i = 0; i < busca.getCaminho().size(); i++) {
-                 atual = busca.getCaminho().get(i).getAgente();
-                 view.setAgente(atual);
-                 repaint();
-                 try {
-                 Thread.sleep(50);
-                 } catch (InterruptedException ex) {
-                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                 }
-                 */
             }
         });
     }
