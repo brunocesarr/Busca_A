@@ -1,27 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package principal;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
  * @author bruno
  */
 public class Principal {
-
     public static void main(String[] args) {
-        Leitura ler = new Leitura();
-        ler.fileChooser();
+      try {
+        Reader reader = new Reader();
+        reader.selectFile();
+  
+        if (!reader.isSelectedFile())
+          System.out.println("Erro ao encontrar o arquivo");   
         
         System.out.println("Matriz:");
-        System.out.println(ler.getMatriz());
-        System.out.println("Ponto Inicial: " + ler.getInicio());
-        System.out.println("Ponto Final: " + ler.getFim());
+        System.out.println(reader.generateMatrix());
+        System.out.println("Ponto Inicial: " + reader.getInitialPosition());
+        System.out.println("Ponto Final: " + reader.getEndPosition());
         System.out.println("");
         
-        Busca busca = new Busca(ler.getInicio(), ler.getFim(), ler.getMatriz());
-        System.out.println(busca.retornaCaminho());
+        Busca busca = new Busca(reader.getInitialPosition(), reader.getEndPosition(), reader.getMatrix());
+        System.out.println(busca.retornaCaminho());        
+      } catch (IOException ex) {
+        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        throw ex;
+      }
     }
 }

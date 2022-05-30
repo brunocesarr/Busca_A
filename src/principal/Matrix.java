@@ -5,16 +5,16 @@ package principal;
  * @author bruno
  * @param <T>
  */
-public class Matriz<T> {
+public class Matrix<T> {
 
     private int linhas;
     private int colunas;
     private T M[][];
 
-    public Matriz() {
+    public Matrix() {
     }
 
-    public Matriz(int n, int m) {
+    public Matrix(int n, int m) {
         this.linhas = n;
         this.colunas = m;
         this.M = (T[][]) new Object[n][m];
