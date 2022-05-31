@@ -49,7 +49,7 @@ public class Reader {
   
       this.isSelectedFile = (typeResultOptionSelect == JFileChooser.APPROVE_OPTION && this.selectedFile.exists());      
     } catch (IOException ex) {
-      Logger.getLogger(Leitura.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(Reader.class.getName()).log(Level.SEVERE, null, ex);
       throw ex;
     }
   }
@@ -85,10 +85,10 @@ public class Reader {
   }
 
   private Matrix createNewMatrix(BufferedReader bufferedReader) {
-    String[] textsInLine = br.readLine().split(" ");
+    String[] textsInLine = bufferedReader.readLine().split(" ");
     int width = Integer.parseInt(textsInLine[0]);
     int height = Integer.parseInt(textsInLine[1]);
-    return new Matriz(width, height);
+    return new Matrix(width, height);
   }
 
   private Matrix generateLineMatrix(BufferedReader bufferedReader, int indexY) {

@@ -4,36 +4,42 @@ package principal;
  * @author bruno
  */
 public class Position {
-    int X;
-    int Y;
+  int X;
+  int Y;
 
-    public Position() {}
+  public Position() {}
 
-    public Position(int X, int Y) {
-        this.X = X;
-        this.Y = Y;
-    }
+  public Position(int X, int Y) {
+    this.X = X;
+    this.Y = Y;
+  }
 
-    public int getX() {
-        return X;
-    }
+  public int getX() {
+    return X;
+  }
 
-    public void setX(int X) {
-        this.X = X;
-    }
+  public void setX(int X) {
+    this.X = this.getNumberValid(X);
+  }
 
-    public int getY() {
-        return Y;
-    }
+  public int getY() {
+    return Y;
+  }
 
-    public void setY(int Y) {
-        this.Y = Y;
-    }
+  public void setY(int Y) {
+    this.Y = this.getNumberValid(Y);
+  }
 
-    @Override
-    public String toString() {
-        String s = "(" + X + ", " + Y + ")";
-        return s;
-    }
+  @Override
+  public String toString() {
+    String s = "(" + X + ", " + Y + ")";
+    return s;
+  }
 
+  private int getNumberValid(int number) {
+    if (number == null)
+      return 0;
+
+    return number >= 0 ? number : 0; 
+  }
 }
