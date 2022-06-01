@@ -14,23 +14,23 @@ public class Estado implements Comparable<Estado> {
     private int heurist;
     private int custo;
     private double avaliacao;
-    private Posicao agente;
+    private Position agente;
     private int pai;
 
     public Estado() {
     }
 
-    public Estado(Posicao agente) {
+    public Estado(Position agente) {
         this.agente = agente;
     }
 
-    public Estado(int custo, int avaliacao, Posicao agente) {
+    public Estado(int custo, int avaliacao, Position agente) {
         this.custo = custo;
         this.avaliacao = avaliacao;
         this.agente = agente;
     }
 
-    public Estado(int heurist, int custo, int avaliacao, Posicao agente) {
+    public Estado(int heurist, int custo, int avaliacao, Position agente) {
         this.heurist = heurist;
         this.custo = custo;
         this.avaliacao = avaliacao;
@@ -62,11 +62,11 @@ public class Estado implements Comparable<Estado> {
         this.avaliacao = (this.custo + this.heurist);
     }
 
-    public Posicao getAgente() {
+    public Position getAgente() {
         return agente;
     }
 
-    public void setAgente(Posicao agente) {
+    public void setAgente(Position agente) {
         this.agente = agente;
     }
 

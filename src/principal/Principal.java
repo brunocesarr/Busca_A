@@ -26,7 +26,6 @@ public class Principal {
         System.out.println(busca.retornaCaminho());        
       } catch (IOException ex) {
         Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        throw ex;
       }
     }
 }

@@ -37,9 +37,6 @@ public class Position {
   }
 
   private int getNumberValid(int number) {
-    if (number == null)
-      return 0;
-
     return number >= 0 ? number : 0; 
   }
 }

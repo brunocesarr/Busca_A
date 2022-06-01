@@ -15,13 +15,13 @@ import java.util.PriorityQueue;
  */
 public class Busca {
 
-    private Posicao inicio;
-    private Posicao fim;
-    private Matriz matriz;
+    private Position inicio;
+    private Position fim;
+    private Matrix matriz;
     private PriorityQueue<Estado> borda;
     private List<Estado> caminho;
 
-    public Busca(Posicao inicio, Posicao fim, Matriz matriz) {
+    public Busca(Position inicio, Position fim, Matrix matriz) {
         this.inicio = inicio;
         this.fim = fim;
         this.matriz = matriz;
@@ -30,27 +30,27 @@ public class Busca {
         this.inicializa();
     }
 
-    public Posicao getInicio() {
+    public Position getInicio() {
         return inicio;
     }
 
-    public void setInicio(Posicao inicio) {
+    public void setInicio(Position inicio) {
         this.inicio = inicio;
     }
 
-    public Posicao getFim() {
+    public Position getFim() {
         return fim;
     }
 
-    public void setFim(Posicao fim) {
+    public void setFim(Position fim) {
         this.fim = fim;
     }
 
-    public Matriz getMatriz() {
+    public Matrix getMatriz() {
         return matriz;
     }
 
-    public void setMatriz(Matriz matriz) {
+    public void setMatriz(Matrix matriz) {
         this.matriz = matriz;
     }
 
@@ -127,28 +127,28 @@ public class Busca {
         int y = node.getAgente().getY();
         if ((x - 1) >= 0) {
             if ((int) this.matriz.retornaValor(x - 1, y) == 1) {
-                novo = new Estado(new Posicao(x - 1, y));
+                novo = new Estado(new Position(x - 1, y));
                 this.calcula(novo, node);
                 this.borda.add(novo);
             }
         }
         if ((x + 1) < this.matriz.getLinhas()) {
             if ((int) this.matriz.retornaValor(x + 1, y) == 1) {
-                novo = new Estado(new Posicao(x + 1, y));
+                novo = new Estado(new Position(x + 1, y));
                 this.calcula(novo, node);
                 this.borda.add(novo);
             }
         }
         if ((y - 1) >= 0) {
             if ((int) this.matriz.retornaValor(x, y - 1) == 1) {
-                novo = new Estado(new Posicao(x, y - 1));
+                novo = new Estado(new Position(x, y - 1));
                 this.calcula(novo, node);
                 this.borda.add(novo);
             }
         }
         if ((y + 1) < this.matriz.getColunas()) {
             if ((int) this.matriz.retornaValor(x, y + 1) == 1) {
-                novo = new Estado(new Posicao(x, y + 1));
+                novo = new Estado(new Position(x, y + 1));
                 this.calcula(novo, node);
                 this.borda.add(novo);
             }

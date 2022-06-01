@@ -1,5 +1,6 @@
 package principal;
 
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -22,7 +23,7 @@ public class Reader {
   public Reader() {
   }
 
-  public Matriz getMatrix() {
+  public Matrix getMatrix() {
     return matrix;
   }
 
@@ -48,13 +49,13 @@ public class Reader {
       this.selectedFile = jFileChooser.getSelectedFile();
   
       this.isSelectedFile = (typeResultOptionSelect == JFileChooser.APPROVE_OPTION && this.selectedFile.exists());      
-    } catch (IOException ex) {
+    } catch (HeadlessException ex) {
       Logger.getLogger(Reader.class.getName()).log(Level.SEVERE, null, ex);
       throw ex;
     }
   }
 
-  public Matrix generateMatrix() {
+  public Matrix generateMatrix() throws IOException {
     try {
       FileReader fileReader = new FileReader(this.selectedFile);
       BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -79,23 +80,23 @@ public class Reader {
     }
   }
 
-  private Position getPosition(BufferedReader bufferedReader) {
+  private Position getPosition(BufferedReader bufferedReader) throws IOException {
     String[] textsInLine = bufferedReader.readLine().split(" ");
     return new Position(Integer.parseInt(textsInLine[0]), Integer.parseInt(textsInLine[1]));
   }
 
-  private Matrix createNewMatrix(BufferedReader bufferedReader) {
+  private Matrix createNewMatrix(BufferedReader bufferedReader) throws IOException {
     String[] textsInLine = bufferedReader.readLine().split(" ");
     int width = Integer.parseInt(textsInLine[0]);
     int height = Integer.parseInt(textsInLine[1]);
     return new Matrix(width, height);
   }
 
-  private Matrix generateLineMatrix(BufferedReader bufferedReader, int indexY) {
+  private Matrix generateLineMatrix(BufferedReader bufferedReader, int indexY) throws IOException {
     String[] textsInLine = bufferedReader.readLine().split(" ");
     
     for(int indexX = 0; indexX < textsInLine.length; indexX++) {
-      this.matrix.adiciona(indexY, indexX, Integer.parseInt(textsInLine[j]));    
+      this.matrix.adiciona(indexY, indexX, Integer.parseInt(textsInLine[indexX]));    
     }
     
     return this.matrix;
