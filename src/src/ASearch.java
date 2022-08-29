@@ -4,6 +4,7 @@ import src.Entities.State;
 import src.Entities.Position;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import src.Entities.ASearchInput;
@@ -21,14 +22,14 @@ public class ASearch implements IASearch {
     public ASearch(ASearchInput aSearchInput) {
         this.aSearchInput = aSearchInput;
         this.statesEdge = new PriorityQueue<>();
-        this.bestPath = new ArrayList<>();
+        this.bestPath = new LinkedList<>();
         this.startStarSearch();        
     }
 
     public ASearch(Position initialPosition, Position endPosition, Matrix matrix) {
         this.aSearchInput = new ASearchInput(matrix, initialPosition, endPosition);
         this.statesEdge = new PriorityQueue<>();
-        this.bestPath = new ArrayList<>();
+        this.bestPath = new LinkedList<>();
         this.startStarSearch();        
     }
 
@@ -147,7 +148,7 @@ public class ASearch implements IASearch {
     }
 
     private void findFinalPath() {
-        List<State> bestStatesPath = new ArrayList<>();
+        List<State> bestStatesPath = new LinkedList<>();
         State stateNode = this.bestPath.get(this.bestPath.size() - 1);
         bestStatesPath.add(stateNode);
 

@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/195281/source/github/Busca_A/src/screens/Painel.java</file>
-            <file>file:/C:/Users/195281/source/github/Busca_A/src/screens/Inicial.java</file>
-            <file>file:/C:/Users/195281/source/github/Busca_A/src/src/Entities/ASearchInput.java</file>
-            <file>file:/C:/Users/195281/source/github/Busca_A/src/screens/Pontos.java</file>
+            <file>file:/C:/Users/195281/source/github/Busca_A/src/src/Principal.java</file>
+            <file>file:/C:/Users/195281/source/github/Busca_A/src/src/Interfaces/IASearch.java</file>
+            <file>file:/C:/Users/195281/source/github/Busca_A/src/src/ASearch.java</file>
         </group>
     </open-files>
 </project-private>
